@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+
+HOME
+
+{% endblock title %}
+
+
+{% block body %}
+
+
+<div class="hero-banner">
+    <img src="{% static 'img/offer_banner.jpg' %}" alt="">
+</div>
+
+  <div class="services">
+    <div class="box-container">
+      <div class="box shadow">
+        <i class="fa fa-truck"></i>
+        <div class="box-text">
+          <h3>Free shipping</h3>
+          <p>On all orders over $100</p>
+        </div>
+      </div>
+      <div class="box shadow">
+        <i class="fa fa-archive"></i>
+        <div class="box-text">
+          <h3>Free Returns</h3>
+          <p>Returns are free within 9 days</p>
+        </div>
+      </div>
+      <div class="box shadow">
+        <i class="fa fa-phone"></i>
+        <div class="box-text">
+          <h3>Support 24/7</h3>
+          <p>Contact us 24 hours a day</p>
+        </div>
+      </div>
+      <div class="box shadow">
+        <i class="fa fa-credit-card"></i>
+        <div class="box-text">
+          <h3>100% Secure</h3>
+          <p>100% Payment Secure</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="top-mobiles">        
+    <h1>Top mobile deals</h1>
+    <div class="box-container">
+      <a href="">
+        <div class="box shadow">
+          <img src="{% static './img/iphone 13.jpg' %}" alt="">
+          <p>Iphone 13</p>
+        </div>
+      </a>
+      <a href="">
+        <div class="box shadow">
+          <img src="{% static './img/samsung s10 plus.jpg' %}" alt="">
+          <p>samsung galaxy s10 plus</p>
+        </div>
+      </a>
+      <a href="">
+        <div class="box shadow">
+          <img src="{% static './img/iphone 13 pro max.jpg' %}" alt="">
+          <p>Iphone 13 pro max</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="payment-ways">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="box col-5 offset-1 col-sm-2">
+          <img src="{% static './img/upi.jpg' %}" alt="">
+        </div>
+        <div class="box col-5 offset-1 col-sm-2">
+          <img src="{% static './img/nb.jpg' %}" alt="">
+        </div>
+        <div class="box col-5 offset-1 col-sm-2">
+          <img src="{% static './img/bj.jpg' %}" alt="">
+        </div>
+        <div class="box col-5 offset-1 col-sm-2">
+          <img src="{% static './img/cc.jpg' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock body %}

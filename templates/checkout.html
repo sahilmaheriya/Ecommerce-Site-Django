@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Checkout
+{% endblock title %}
+
+
+{% block body %}
+
+{% if cart %}
+
+
+<section class="checkout">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-8 col-12">
+                <h1>order summary</h1>
+                <hr>
+                <div class="box-container">
+                    {% for ct in cart %}
+                        <div class="box shadow p-3 my-4">
+                            <p class="fs-3">product : {{ct.product.title}}</p>
+                            <p class="fs-3">quantity : {{ct.quantity}}</p>
+                            <p class="fs-3">price : {{ct.total_cost}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <p class='fs-3'> total cost + 70rs = {{total_amount}}</p>
+            </div>
+            <div class="col-md-4 col-12">
+                <h1>select shipping address</h1>
+                <hr>
+                {% if address %}
+                <div class="box shadow p-3 my-4">
+                    <form action="/payment_done">
+                        {% for add in address %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="fs-3">{{add.name}}</h4>
+                                    <p class="fs-4">{{add.locality}}, {{add.city}}, {{add.state}} - {{add.zipcode}} </p>
+                                </div>
+                            </div>
+                            <div class="form-check mt-2 mb-5">
+                                <input class="form-check-input mt-2 fs-5" type="radio" value="{{add.id}}" name="address_id" id="address{{forloop.counter}}">
+                                <label for="address{{forloop.counter}}" class="form-check-label fw-bold">
+                                    <span class="fs-4">address : {{forloop.counter}}</span>
+                                </label>
+                            </div>
+                        {% endfor %}
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-warning mt-3 btn-lg px-5 fw-bold w-100">continue</button>
+                        </div>
+                    </form>
+                </div>
+
+                {% else %}
+
+                <h1 class="mt-5">no address found...</h1>
+
+                <a href="{% url 'add_address' %}" class="btn btn-primary btn-lg w-100 mt-5">add your address</a>
+                               
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+
+<div class="container mt-5 text-center">
+    <h1>No Product Found</h1>
+</div>
+
+
+{% endif %}
+
+{% endblock body %}

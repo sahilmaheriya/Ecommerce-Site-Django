@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+account
+{% endblock title %}
+
+{% block body %}
+
+<section class="account">    
+    <div class="container shadow mt-5">
+        <h1 class="text-center">Welcome to Our site : {{request.user.username}}</h1>
+        
+        <div class="row mt-5">
+            <div class="col-sm-4 col-11 mx-auto mb-5">
+                <h2>some options</h2>
+                <hr>
+                <a href="{% url 'add_address' %}" class="btn btn-primary btn-lg">Add Address</a>
+                <br>
+                <a href="{% url 'change_password' %}" class="btn btn-warning btn-lg my-5">Change Password</a>
+                <br>
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">Logout</a>
+                <br>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-lg my-5">checkout</a>
+                <br>
+                <a href="{% url 'orders' %}" class="btn btn-primary btn-lg">your orders</a>
+            </div>
+            <div class="col-sm-8 col-11 mx-auto all-addresses">
+                <h2>All Address</h2>
+                <hr>
+                <div class="address-container row">
+                    {% if all_addresses %}
+                   
+                        {% for address in all_addresses %}
+                        <div class="address-box shadow col-sm-5 col-12 p-4 offset-1 m-auto">
+                            <h2 class="mb-2">Address : {{forloop.counter}} </h2>
+                            <h3>Name : {{address.name}}</h3>
+                            <h3>Locality : {{address.locality}}</h3>
+                            <h3>city : {{address.city}}</h3>
+                            <h3>state : {{address.state}}</h3>
+                            <h3>zipcode : {{address.zipcode}}</h3>
+                            <a href="{% url 'del_address' address.id %}" class="btn btn-danger btn-lg">Delete</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        
+                        <h1 class='mt-5'>no address found..</h1>
+                        <h1>Please add your address</h1>    
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</section>
+    {% endblock body %}

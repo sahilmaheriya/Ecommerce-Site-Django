@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Registration
+
+{% endblock title %}
+
+
+
+{% block body %}
+
+<section class="registration">
+    <div class="container row">
+        <div class="col-12 col-md-7 m-auto">
+        <h1 class="mb-4">Please Signup</h1>
+        <form action="" method='post' class='shadow p-5' novalidate>
+            {% if messages %}
+                {% for message in messages %}
+                    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+    
+            {% for fm in form %}
+                <div class="form-group mb-3">
+                    {{fm.label_tag}} {{fm}} <small class="text-danger error">{{fm.errors|striptags}}</small>
+                </div>
+            {% endfor %}
+            <br>
+            <input type="submit" value="submit" class="btn btn-primary btn-lg px-4">
+            <a href="{% url 'accountlogin' %}" class="fs-4 mx-5">Existing User?</a>
+        </form>
+    </div>
+    </div>
+</section>
+
+{% endblock body %}

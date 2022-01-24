@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+{% endblock style %}
+
+{% block body %}
+
+<section class="product_detail">
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-sm-5 col-12">
+                <div class="product-img">
+                    <img src="{{product.product_image.url}}" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-sm-6 col-12">
+               
+                <div class="product-about">
+                    <h1 class="product-title my-4">{{product.title}}</h1>
+
+                    <div class="product-desc my-5">
+                        <p class="fs-4">{{product.description}}</p>
+                    </div>
+
+                    <div class="product-price">
+                        <span class="fs-3">₹ {{product.discounted_price}}</span>
+                        <span class="text-decoration-line-through mx-5 fs-4"> ₹ {{product.selling_price}}</span>
+                    </div>
+
+                    <div class="cart-btns mt-5">
+                        {% if request.user.is_authenticated %}
+                        {% if product_in_cart %}
+                            <a href="{% url 'cart' %}" class="btn btn-primary btn-lg p-3 fs-4 shadow w-50" id="go_to_cart">Go to cart</a>
+                        
+                        {% else %}
+                                <form action="" method="post" class="col-5 d-inline" id="addtocart">
+                                    {% csrf_token %}
+                                    <button type='button' class="btn btn-success fs-4 shadow" name="prod_id" data-sid="{{product.id}}" id="prod_id">Add To Card <i class="fas fa-shopping-cart p-3"></i></button>
+                                </form>
+                                
+                                <form action="{% url 'buynow' %}" method="post" class="d-inline" id="buynow">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{product.id}}">
+                                    <button type="submit" class="btn btn-warning mx-5 fs-4 shadow">Buy Now <i class="far fa-credit-card p-3"></i></button>
+                                </form>
+                        {% endif %}
+                            
+                        {% else %}
+
+                        <a href="{% url 'accountlogin' %}" class="btn btn-primary btn-lg fs-4 shadow">add to cart</a>
+
+                        {% endif %}
+                    </div>
+
+               </div>
+
+            </div>
+        </div>
+        <br>
+        <h1 class="my-5">Related Products</h1>
+        <div class="owl-carousel">
+            {% for rp in related_product %}
+            <div class="box shadow">
+                <img src="{{rp.product_image.url}}" alt="" class="">
+                <a href="{% url 'product_detail' rp.id %}" class="fs-4 title">{{rp.title}}</a>
+                <div class="price">
+                    <p class="fs-5 fw-bold">₹{{rp.discounted_price}}</p>
+                    <small class="text-decoration-line-through fs-5">₹{{rp.selling_price}}</small>
+                </div>
+                <a href="{% url 'product_detail' rp.id %}" class="btn btn-primary">show product</a>
+            </div>
+            {% endfor %}
+        </div>  
+    </div>
+    
+
+</section>
+
+
+
+{% block script %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            autoplay:true,
+            margin:10,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                400:{
+                    items:2,
+                    nav:false
+                },
+                600:{
+                    items:2,
+                    nav:false
+                },
+                1000:{
+                    items:4,
+                    nav:true,
+                    loop:false
+                }
+            }
+        })
+    })
+</script>
+
+{% endblock script %}
+
+
+{% endblock body %}

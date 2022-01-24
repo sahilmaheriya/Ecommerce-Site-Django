@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About
+{% endblock title %}
+
+{% block body %}
+
+<section class="about">
+    <div class="container about-site mt-5">
+        <div class="row">
+            <div class="col-10 m-auto col-sm-6 box">
+                <img src="{% static '/img/about.png' %}" alt="" class="img-fluid">
+            </div>
+            <div class="col-10 m-auto col-sm-6 box">
+                <h1 class="my-5">Welcolme To PhoneSeller</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, saepe velit. Neque nulla eos consequuntur excepturi placeat? Delectus aliquid, sint quia corporis modi ut quisquam consequuntur deleniti et placeat! Voluptatum.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, saepe velit. Neque nulla eos consequuntur excepturi placeat? Delectus aliquid, sint quia corporis modi ut quisquam consequuntur deleniti et placeat! Voluptatum Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime unde dolores nemo voluptate earum atque voluptatem qui. Suscipit molestiae ipsum accusantium quisquam veritatis qui, placeat rem laborum delectus rerum.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container about-us">
+        <div class="row">
+            <div class="col-12 col-sm-3 box shadow">
+                <h1>Our Company</h1>
+                <p class="fs-5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore doloremque alias rerum minima sed sunt cumque, laudantium laborum magni praesentium sit tempora vero eum unde. Ducimus ex ipsam quaerat? Sunt.</p>
+            </div>
+            <div class="col-12 col-sm-3 box shadow">
+                <h1>Our Team</h1>
+                <p class="fs-5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore doloremque alias rerum minima sed sunt cumque, laudantium laborum magni praesentium sit tempora vero eum unde. Ducimus ex ipsam quaerat? Sunt.</p>
+            </div>
+            <div class="col-12 col-sm-3 box shadow">
+                <h1>Testimonial</h1>
+                <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore doloremque alias rerum minima sed sunt cumque, laudantium laborum magni praesentium sit tempora vero eum unde. Ducimus ex ipsam quaerat? Sunt.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

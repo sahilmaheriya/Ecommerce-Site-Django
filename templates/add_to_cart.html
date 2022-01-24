@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Cart
+{% endblock title %}
+
+{% block body %}
+
+<section class="cart-sec mt-5">
+    <div class="container">
+        <br>
+        <h1 class="text-center">shopping cart</h1>
+        {% if data %}
+            <h1>{{data}}</h1>
+        {% else %}
+       
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="box-container">
+                    {% for ct in cart %}
+                    <div class="row box shadow my-4 align-items-center">
+                        <div class="col-sm-4 col-10 mx-auto">
+                            <img src="{{ct.product.product_image.url}}" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-sm-8 col-10 mx-auto">
+                           <a href="{% url 'product_detail' ct.product.id %}" class="fs-3">{{ct.product.title}}</a>
+                           <p class="lead mt-2">{{ct.product.description}}</p>
+                           <div class="row">
+                               <div class="col-6">
+                                <p class="fs-3">Quantity: </p>
+                                <a class="minus-cart btn" pid="{{ct.product.id}}"><i class="fas fa-minus-square fa-lg fs-3"></i></a>
+                                <span id="quantity" class="fs-3">{{ct.quantity}}</span>
+                                <a class="plus-cart btn" pid="{{ct.product.id}}"><i class="fas fa-plus-square fa-lg fs-3"></i></a>
+                               </div>
+                               <div class="col-6">
+                                <p class="fs-3">Rs. <span>{{ct.product.discounted_price}}</span></p>
+                                <a class="btn btn-danger btn-lg remove-cart mb-5" pid={{ct.product.id}}>Remove product</a>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4 col-12 mt-4">
+                <div class="box shadow p-4">
+                    <h1>The total amount</h1>
+                    <div class="amount d-flex justify-content-between">
+                        <p class='fs-4'>amount</p>
+                        <p class='fs-4'>Rs. <span id="amount">{{amount}}</span></p>
+                    </div>
+                    <div class="shipping d-flex justify-content-between">
+                        <p class='fs-4'>shipping</p>
+                        <p class='fs-4'>Rs. <span>70.00</span></p>
+                    </div>
+                    <hr>
+                    <div class="totle d-flex justify-content-between">
+                        <p class="fs-3">total(including VAT)</p>
+                        <p class="fs-3">Rs. <span id="total_amount">{{total_amount}}</span></p>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-5 btn-lg">place order</a>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+</section>
+
+{% endblock body %}

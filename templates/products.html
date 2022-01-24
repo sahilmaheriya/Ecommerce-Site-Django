@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Products
+
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+{% endblock style %}
+
+{% block body %}
+
+<div class="product-filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 m-auto search-box">
+                <form action="" id="search-form" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="text" id="search-input" class="form-control p-2 fs-4" placeholder="Search Products">
+                </form>
+                <div id="result-box" class="result-card not-visible">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="products">
+    <div class="container">
+        <h1 class="m-5">Apple Products ></h1>
+        <div class="owl-carousel">
+
+            {% for apple in apple_product %}
+            <div class="box shadow">
+                <img src="{{apple.product_image.url}}" alt="" class="">
+                <a href="{% url 'product_detail' apple.id %}" class="fs-4 title">{{apple.title}}</a>
+                <div class="price">
+                    <p class="fs-5 fw-bold">₹{{apple.discounted_price}}</p>
+                    <small class="text-decoration-line-through fs-5">₹{{apple.selling_price}}</small>
+                </div>
+                <a href="{% url 'product_detail' apple.id %}" class="btn btn-primary">Show product</a>
+            </div>
+            {% endfor %}
+        </div>  
+
+        <hr>
+        
+        <h1 class="m-5">Samsung Products ></h1>
+        <div class="owl-carousel">
+            {% for samsung in samsung_product %}
+            <div class="box shadow">
+                <img src="{{samsung.product_image.url}}" alt="" class="img-fluid">
+                <a href="{% url 'product_detail' samsung.id %}" class="fs-4 title">{{samsung.title}}</a>
+                <div class="price">
+                    <p class="fs-5 fw-bold">₹{{samsung.discounted_price}}</p>
+                    <small class="text-decoration-line-through fs-5">₹{{samsung.selling_price}}</small>
+                </div>
+                <a href="{% url 'product_detail' samsung.id %}" class="btn btn-primary">Show product</a>
+            </div>
+            {% endfor %}
+        </div>   
+    </div>
+</div>
+
+
+{% block script %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            autoplay:true,
+            dots:false,
+            margin:10,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                400:{
+                    items:2,
+                    nav:false
+                },
+                600:{
+                    items:2,
+                    nav:false
+                },
+                1000:{
+                    items:4,
+                    nav:true,
+                    loop:false
+                }
+            }
+        })
+    })
+</script>
+
+{% endblock script %}
+
+{% endblock body %}
+

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Your Orders
+
+{% endblock title %}
+
+
+{% block body %}
+
+
+{% if obj %}
+
+    <section class="orders">
+        <div class="container mt-5">
+            <h1>your orders</h1>
+            {% for p in obj %}
+            <div class="row box shadow my-5 p-2">
+                <div class="col-md-6">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <img src="{{p.product.product_image.url}}" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-8">
+                            <p class="fs-3">Product : {{p.product.title}}</p>
+                            <p class="fs-3">quantity : {{p.quantity}}</p>
+                            <p class="fs-3">price : {{p.total_cost}} </p>
+                            <p class="fs-3">ordered date : {{p.ordered_date}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-5">
+                    <p class="fs-3">order status : </p>
+
+                    {% if p.status == 'Accepted' %}
+                    <p class="fs-5">Accepted</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width:20%" aria-valuenow="40" aria-valuemin="0" arai-valuemax = "100">
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if p.status == 'Packed' %}
+                    <p class="fs-5">Packed</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width:40%" aria-valuenow="40" aria-valuemin="0" arai-valuemax = "100">
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if p.status == 'Delivered' %}
+                    <p class="fs-5">Delivered</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width:60%" aria-valuenow="40" aria-valuemin="0" arai-valuemax = "100">
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if p.status == 'Cancel' %}
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width:100%" aria-valuenow="40" aria-valuemin="0" arai-valuemax = "100">
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <a href="{% url 'order_cancel' p.id %}" class="btn btn-danger btn-lg mt-5">Cancel your order</a>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% else %}
+
+<div class="container mt-5 text-center">
+    <h1>No orders</h1>
+</div>
+
+{% endif %}
+
+{% endblock body %}
